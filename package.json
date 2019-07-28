@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "cross-env DEBUG=nodepop:* nodemon",
-    "prod": "cross-env NODE_ENV=production npm start"
+    "prod": "cross-env NODE_ENV=production npm start",
+    "installDB":"cross-env nodemon ./lib/install_db.js"
   },
   "dependencies": {
     "cross-env": "^5.2.0",

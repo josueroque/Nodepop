@@ -25,10 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
  */
 require('./lib/conMongoose');
 require('./models/Anuncio');
-require('./lib/install_db');
 
 /**
- * Rutas de mi API
+ * API Routes
  */
 // app.use('/apiv1/agentes', require('./routes/apiv1/agentes'));
 

@@ -8,7 +8,7 @@ const anuncioSchema = mongoose.Schema({
   sale: Boolean,
   price:Number,
   photo:String,
-  tags:String
+  tags:Array
 }
 //, { collection: 'anuncios'} // para saltarse la pluralización
 );
