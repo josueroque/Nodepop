@@ -1,24 +1,62 @@
-var express = require('express');
-var router = express.Router();
+'use strict';
+const express = require('express');
+const router = express.Router();
+
+const Anuncio = require('../models/Anuncio');
+// object destructuring
+const { query, body, param, validationResult } = require('express-validator');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  const segundo = (new Date()).getSeconds();
 
-  res.locals.valor = '<script>alert("inyeccion de codigo")</script>';
-  res.locals.condicion = {
-    segundo: segundo,
-    estado: segundo % 2 === 0 // es par
-  };
+router.get('/', async (req, res, next) => {
+  // Agente.find().exec((err, agentes) => {
+  //   if (err) {
+  //     next(err); // ecalar el error al gestor de errores
+  //     return;
+  //   }
+  //   res.json({ success: true, agentes: agentes });
+  // });
+  try {
 
-  res.locals.users = [
-    { name: 'Smith', age: 23 },
-    { name: 'Jones', age: 35 },
-    { name: 'Thomas', age: 21 },
-  ];
+    const name = req.query.name;
+    const age = req.query.age;
+    const skip = parseInt(req.query.skip);
+    const limit = parseInt(req.query.limit);
+    const fields = req.query.fields;
+    const sort = req.query.sort;
 
-  res.render('index');
+    const filter = {};
+
+    if (name) {
+      filter.name = name;
+    }
+
+    // if (typeof age !== 'undefined') {
+    //   filter.age = age;
+    // }
+
+    const anuncios = await Anuncio.list({ filter: filter, skip, limit, fields, sort});
+
+   // res.json({ success: true, results: agentes });
+   res.locals.valor='valor';
+   res.locals.title='Nodepop';
+   res.locals.adList=anuncios;
+   res.render('index'); 
+
+
+  } catch (err) {
+    next(err);
+  }
 });
+
+
+// router.get('/', function(req, res, next) {
+
+//   res.locals.anuncios = Anuncio.list();
+
+
+//   res.render('index');
+// });
 
 
 module.exports = router;

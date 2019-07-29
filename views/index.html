@@ -5,24 +5,27 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1>Nodepop</h1>
+    <p style="text-align: center">Welcome to Nodepop Advertisements</p>
   
-  <h2>Escapar valores </h2>
- <p><% valor %></p>
-
- <h2>Condicionales</h2>
- <% if(condicion.estado) {%>
- <p><%= condicion.segundo  %> es par</p>
-<%}else { %>
-  <p><%= condicion.segundo  %> es impar</p>
- <% } %> 
-
-
- <h2>Bucles </h2>
- <% users.forEach(users => { %>
- <p><%= users.name %> tiene <%= users.age %> años</p>
- <% }) %>
+  <h2 style="text-align: center" >Avaible Deals</h2>
+  </br>
+     <div class="grid">
+    <% adList.forEach(ad => { %>
+      <article class="grid">
+        <img src="/images/<%= ad.photo %> "   width="200" height="160">
+        <ul style="margin-left:-7vw">
+            <li>Product name: <%= ad.name %> </li>
+            <li>Price: <%= ad.price %> </li>
+            <li>Transaction Type: <%= ad.sale %> </li>
+            <li>Tags: <%= ad.tags %> </li>
+        </ul>
+     </article>
+      <% }) %> 
+   </div>
+ 
+  
+  
 
 </body>
 </html>
