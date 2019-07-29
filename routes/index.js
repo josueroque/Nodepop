@@ -9,17 +9,11 @@ const { query, body, param, validationResult } = require('express-validator');
 /* GET home page. */
 
 router.get('/', async (req, res, next) => {
-  // Agente.find().exec((err, agentes) => {
-  //   if (err) {
-  //     next(err); // ecalar el error al gestor de errores
-  //     return;
-  //   }
-  //   res.json({ success: true, agentes: agentes });
-  // });
-  try {
 
+  try {
+console.log('prueba');
     const name = req.query.name;
-    const age = req.query.age;
+    const price = req.query.price;
     const skip = parseInt(req.query.skip);
     const limit = parseInt(req.query.limit);
     const fields = req.query.fields;
@@ -30,11 +24,11 @@ router.get('/', async (req, res, next) => {
     if (name) {
       filter.name = name;
     }
-
-    // if (typeof age !== 'undefined') {
-    //   filter.age = age;
-    // }
-
+console.log( price );
+    if (typeof price !== 'undefined') {
+      filter.price = price;
+    }
+console.log(filter);
     const anuncios = await Anuncio.list({ filter: filter, skip, limit, fields, sort});
 
    // res.json({ success: true, results: agentes });
@@ -48,15 +42,5 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
-
-
-// router.get('/', function(req, res, next) {
-
-//   res.locals.anuncios = Anuncio.list();
-
-
-//   res.render('index');
-// });
-
 
 module.exports = router;

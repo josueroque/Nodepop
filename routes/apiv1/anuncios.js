@@ -29,7 +29,7 @@ router.get('/', async (req, res, next) => {
       }
   
       if (typeof price !== 'undefined') {
-        filter.age = age;
+        filter.price = price;
       }
   
       const anuncios = await Anuncio.list({ filter: filter, skip, limit, fields, sort});
