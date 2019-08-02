@@ -3,10 +3,10 @@ const express = require('express');
 const router = express.Router();
 
 const Anuncio = require('../models/Anuncio');
-// object destructuring
-const { query, body, param, validationResult } = require('express-validator');
 
-router.get('/tags', async (req, res, next) => {
+//const { query, body, param, validationResult } = require('express-validator');
+
+router.get('/tags', async ( res, next) => {
   try {
   const anuncios = await Anuncio.listTags();
   res.json({ success: true, results: anuncios });
@@ -36,21 +36,21 @@ router.get('/', async (req, res, next) => {
 
   try {
 
-    const name = req.query.name;
-    const price = req.query.price;
+    const nombre = req.query.nombre;
+    const precio = req.query.precio;
     const skip = parseInt(req.query.skip);
     const limit = parseInt(req.query.limit);
     const fields = req.query.fields;
     const sort = req.query.sort;
-    const sale=req.query.sale;
+    const venta=req.query.venta;
     const tag=req.query.tag;
     
 
     let filter = {};
-    let exp = new RegExp("^" + name + "","i");
+    let exp = new RegExp('^' + nombre + '','i');
    
-    if(name){
-    filter= {name:exp};
+    if(nombre){
+      filter= {nombre:exp};
     }
     
     //tag filter
@@ -59,17 +59,17 @@ router.get('/', async (req, res, next) => {
       filter.tags=tag;
     }
 
-    //sale filter
-    if (typeof sale !== 'undefined' ){
-      if(sale.toLowerCase()==='false'||sale.toLowerCase()==='true'){
-        filter.sale=sale;
+    //venta filter
+    if (typeof venta !== 'undefined' ){
+      if(venta.toLowerCase()==='false'||venta.toLowerCase()==='true'){
+        filter.venta=venta;
       }
     }
 
-    //price filter
-  if(price){  
+    //precio filter
+  if(precio){  
     let priceStr=new String();
-    priceStr=price.split('');
+    priceStr=precio.split('');
     let hyphen='';
     let countHyphen=0;
     let hyphenPosition=0;
@@ -84,13 +84,13 @@ router.get('/', async (req, res, next) => {
           break;
         case 1:
           if(priceStr.indexOf(char)===0 && char==='-'){
-            hyphen='start'  
+            hyphen='start'  ;
             }
           else if(priceStr.indexOf(char)===(priceStr.length-1) && char==='-'){
-            hyphen='end'
+            hyphen='end';
            }
           else if( char==='-'){
-            hyphen='middle'
+            hyphen='middle';
             hyphenPosition=priceStr.indexOf(char);
            }
           break;  
@@ -107,44 +107,42 @@ let number1=0;
 let number2=0;
 let objectFilter={};
 
-    if (typeof price !== 'undefined') {
+    if (typeof precio !== 'undefined') {
       switch(hyphen){
         case ('start'):
-          number1=price.replace('-','')
-          objectFilter[`$lt`]=parseInt(number1);
-          filter.price=objectFilter; 
+          number1=precio.replace('-','');
+          objectFilter['$lt']=parseInt(number1);
+          filter.precio=objectFilter; 
           break;
         case ('middle'):
-          number1=price.substring(0,(hyphenPosition));
-          number2=price.substring((hyphenPosition+1),(price.length));
-          objectFilter[`$gt`]=parseInt(number1);
-          objectFilter[`$lt`]=parseInt(number2);
-          filter.price=objectFilter; 
+          number1=precio.substring(0,(hyphenPosition));
+          number2=precio.substring((hyphenPosition+1),(precio.length));
+          objectFilter['$gt']=parseInt(number1);
+          objectFilter['$lt']=parseInt(number2);
+          filter.precio=objectFilter; 
           break;    
         case ('end'):
-          number1=price.replace('-','')
-          objectFilter[`$gt`]=parseInt(number1);
-          filter.price=objectFilter; 
+          number1=precio.replace('-','');
+          objectFilter['$gt']=parseInt(number1);
+          filter.precio=objectFilter; 
           break;   
         case ('undef'):
-          filter.price=price; 
+          filter.precio=precio; 
           break;  
         case ('notvalid'):
           res.status(422); 
-          throw ('Invalid Price Parameter');
-          return;
-          break;                 
+          throw ('Invalid precio Parameter');
+          // return;
+          // break;                 
       }
       
-      //  filter.price = price;
+
     }
   }
 
 
-    const anuncios = await Anuncio.list({ filter: filter, skip, limit, fields, sort});
+   const anuncios = await Anuncio.list({ filter: filter, skip, limit, fields, sort});
 
-   // res.json({ success: true, results: agentes });
-   res.locals.valor='valor';
    res.locals.title='Nodepop';
    res.locals.adList=anuncios;
    res.render('index'); 

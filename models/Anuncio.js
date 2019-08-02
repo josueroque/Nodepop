@@ -4,18 +4,17 @@ const mongoose = require('mongoose');
 
 // definimos un esquema
 const anuncioSchema = mongoose.Schema({
-  name: String,
-  price: Number,
-  sale:Boolean,
-  photo:String,
+  nombre: String,
+  precio: Number,
+  venta:Boolean,
+  foto:String,
   tags:Array
   
 }
-//, { collection: 'agentes'} // para saltarse la pluralización
+
 );
 
-// en los metodos de modelos de mongoose no usar arrow functions (perdemos el this a la instancia)
-anuncioSchema.statics.list = function({filter, skip, limit, fields, sort,start}) {
+anuncioSchema.statics.list = function({filter, skip, limit, fields, sort}) {
   const query = Anuncio.find(filter);
  // console.log(filter);
   query.skip(skip);
@@ -24,17 +23,17 @@ anuncioSchema.statics.list = function({filter, skip, limit, fields, sort,start})
   query.sort(sort);
  // query.start(start);
   return query.exec();
-}
+};
 
 anuncioSchema.statics.listTags = function() {
-  const query = Anuncio.distinct("tags") ;
+  const query = Anuncio.distinct('tags') ;
  // console.log(filter);
 
  // query.start(start);
   return query.exec();
-}
+};
 
-// creamos el modelo de agente
+
 const Anuncio = mongoose.model('Anuncio', anuncioSchema);
 
 module.exports = Anuncio;

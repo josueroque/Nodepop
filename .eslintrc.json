@@ -1,6 +1,6 @@
 {
     "env": {
-        "browser": true,
+        "node": true,
         "commonjs": true,
         "es6": true
     },
@@ -17,8 +17,8 @@
         "semi": ["error", "always"],
         "quotes": ["error", "single"],
         "strict":["error","global"],
-        "no-restricted-globals": ["error", "event", "fdescribe"],
-        "no-undef":
+        "no-restricted-globals": ["error", "event", "fdescribe"]
+        
 
     }
 }

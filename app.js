@@ -1,11 +1,12 @@
+'use strict';
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+//var __dirname;
 
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+
 
 var app = express();
 
@@ -50,7 +51,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // comprobar error de validación
   if (err.array) { // error de validación
     err.status = 422;

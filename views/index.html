@@ -13,14 +13,14 @@
      <div class="grid">
     <% adList.forEach(ad => { %>
       <article class="grid">
-        <img src="/images/<%= ad.photo %> "   width="200" height="160">
+        <img src="/images/<%= ad.foto %> "   width="200" height="160">
         <ul style="margin-left:-7vw">
-            <li>Product name: <%= ad.name %> </li>
-            <li>Price: <%= ad.price %> </li>
-            <% if (ad.sale ) { %>
-              <li>Type: Sale </li>
+            <li>Product name: <%= ad.nombre %> </li>
+            <li>Price: <%= ad.precio %> </li>
+            <% if (ad.venta ) { %>
+              <li>Type: Venta </li>
             <% } else { %>
-              <li>Type: Search </li>
+              <li>Type: Busqueda </li>
             <% } %>
               <li>Tags:<%= ad.tags %></li> 
         </ul>
