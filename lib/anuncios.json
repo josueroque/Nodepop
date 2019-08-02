@@ -21,5 +21,13 @@
           "foto":"laptop.jpg",
         "tags":["lifestyle","computers"]
       }
+      ,
+        {
+          "nombre":"T shirt",
+          "venta":false,
+          "precio":500,
+          "foto":"shirt.jpg",
+        "tags":["lifestyle","geek","clothes"]
+      }
     ]
 }

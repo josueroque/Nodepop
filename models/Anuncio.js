@@ -20,7 +20,9 @@ anuncioSchema.statics.list = function({filter, skip, limit, fields, sort}) {
   query.skip(skip);
   query.limit(limit);
   query.select(fields);   
+ 
   query.sort(sort);
+
  // query.start(start);
   return query.exec();
 };

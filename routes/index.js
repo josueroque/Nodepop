@@ -33,47 +33,81 @@ router.post('/', async (req, res, next) => {
 /* GET home page. */
 
 router.get('/', async (req, res, next) => {
-
   try {
 
     const nombre = req.query.nombre;
     const precio = req.query.precio;
-    const skip = parseInt(req.query.skip);
     const limit = parseInt(req.query.limit);
     const fields = req.query.fields;
     const sort = req.query.sort;
     const venta=req.query.venta;
     const tag=req.query.tag;
+    let skip;
+    if(skip){
+      if (isNaN(parseInt(req.query.skip))){
+
+        res.status(422); 
+        throw ('Invalid skip Parameter');
+      }
+       else{ 
+     skip=parseInt(req.query.skip);
+      }
+    }
     
+    if(req.query.limit){
+      if (isNaN(parseInt(req.query.limit))){
+
+        res.status(422); 
+        throw ('Invalid limit Parameter');
+      }
+
+    }
+
+    if(req.query.start){
+  
+      if (isNaN(parseInt(req.query.start))){
+
+        res.status(422); 
+        throw ('Invalid start Parameter');
+      }
+       else{ 
+        skip=parseInt(req.query.start);
+      }
+    }    
 
     let filter = {};
     let exp = new RegExp('^' + nombre + '','i');
    
     if(nombre){
-      filter= {nombre:exp};
+    filter= {nombre:exp};
     }
     
     //tag filter
     if(tag){
-
       filter.tags=tag;
     }
+
 
     //venta filter
     if (typeof venta !== 'undefined' ){
       if(venta.toLowerCase()==='false'||venta.toLowerCase()==='true'){
         filter.venta=venta;
       }
+      else {
+        res.status(422); 
+        throw ('Invalid venta Parameter');
+      }
     }
-
+    
     //precio filter
-  if(precio){  
+  if (precio){
+
     let priceStr=new String();
     priceStr=precio.split('');
     let hyphen='';
     let countHyphen=0;
     let hyphenPosition=0;
-  
+
     for (let char of priceStr){
       if (char==='-'){
         countHyphen++;
@@ -84,7 +118,7 @@ router.get('/', async (req, res, next) => {
           break;
         case 1:
           if(priceStr.indexOf(char)===0 && char==='-'){
-            hyphen='start'  ;
+            hyphen='start';  
             }
           else if(priceStr.indexOf(char)===(priceStr.length-1) && char==='-'){
             hyphen='end';
@@ -111,24 +145,40 @@ let objectFilter={};
       switch(hyphen){
         case ('start'):
           number1=precio.replace('-','');
+          if(isNaN(number1)){
+            res.status(422);
+            throw('Invalid precio parameter');
+          }
           objectFilter['$lt']=parseInt(number1);
           filter.precio=objectFilter; 
           break;
         case ('middle'):
           number1=precio.substring(0,(hyphenPosition));
           number2=precio.substring((hyphenPosition+1),(precio.length));
+          if(isNaN(number1)||isNaN(number2)){
+            res.status(422);
+            throw('Invalid precio parameter');
+          }
           objectFilter['$gt']=parseInt(number1);
           objectFilter['$lt']=parseInt(number2);
           filter.precio=objectFilter; 
           break;    
         case ('end'):
           number1=precio.replace('-','');
+          if(isNaN(number1)){
+            res.status(422);
+            throw('Invalid precio parameter');
+          }
           objectFilter['$gt']=parseInt(number1);
           filter.precio=objectFilter; 
           break;   
         case ('undef'):
+            if(isNaN(precio)){
+              res.status(422);
+              throw('Invalid precio parameter');
+            }
           filter.precio=precio; 
-          break;  
+          break;            
         case ('notvalid'):
           res.status(422); 
           throw ('Invalid precio Parameter');
@@ -136,9 +186,10 @@ let objectFilter={};
           // break;                 
       }
       
-
+   
     }
   }
+
 
 
    const anuncios = await Anuncio.list({ filter: filter, skip, limit, fields, sort});
