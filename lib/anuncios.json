@@ -3,17 +3,23 @@
         {
             "name":"Suzuki Alto 2009",
             "sale":true,
-            "price":200000,
+            "price":100000,
             "photo":"Suzuki-Alto.jpg",
           "tags":["lifestyle","motor"]
         },
         {
             "name":"LG G7",
             "sale":true,
-            "price":15000,
+            "price":9000,
             "photo":"G7.jpg",
           "tags":["lifestyle","mobile"]
-        }
-
+        },
+        {
+          "name":"Laptop Toshiba Satelite",
+          "sale":false,
+          "price":12000,
+          "photo":"laptop.jpg",
+        "tags":["lifestyle","computers"]
+      }
     ]
 }

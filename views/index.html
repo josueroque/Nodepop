@@ -17,8 +17,12 @@
         <ul style="margin-left:-7vw">
             <li>Product name: <%= ad.name %> </li>
             <li>Price: <%= ad.price %> </li>
-            <li>Transaction Type: <%= ad.sale %> </li>
-            <li>Tags: <%= ad.tags %> </li>
+            <% if (ad.sale ) { %>
+              <li>Type: Sale </li>
+            <% } else { %>
+              <li>Type: Search </li>
+            <% } %>
+              <li>Tags:<%= ad.tags %></li> 
         </ul>
      </article>
       <% }) %> 
