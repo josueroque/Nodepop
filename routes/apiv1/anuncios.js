@@ -91,14 +91,18 @@ router.get('/',async (req, res, next) => {
 
     //venta filter
     if (typeof venta !== 'undefined' ){
-      if(venta.toLowerCase()==='false'||venta.toLowerCase()==='true'){
-        filter.venta=venta;
+      if(venta.toLowerCase()==='false'){
+        filter.venta=false;
+      }
+      else if(venta.toLowerCase()==='true'){
+        filter.venta=true;
       }
       else {
         res.status(422); 
         throw ('Invalid venta Parameter');
       }
     }
+
 
     //precio filter
   if (precio){
