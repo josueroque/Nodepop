@@ -3,7 +3,15 @@
 ## Description
 
 NodePop is a WebApp where users can publish Advertisements to sale or search all kinds of second-hand products.
-It was developed using Node.Js, Express and MongoDB 
+It was developed using Node.Js, Express and MongoDB
+
+## Dependencies Install
+
+Use:
+```
+npm install
+```
+This will install all modules listed as dependencies in package.json.
 
 ## Database Setup
 
