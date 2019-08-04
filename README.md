@@ -51,6 +51,9 @@ This returns a Json file with the complete list of the existing ads in the datab
 * sort=[string] Order the list of products based on the given field.
 * skip[integer] Starts for number of row indicated.
 
+**GET** 
+[/apiv1/anuncios/tags] Retrieve the list of the existing tags in the database.
+
 **POST** create new Ads on the database with the following parameters:
 
 * nombre=[string] - required
