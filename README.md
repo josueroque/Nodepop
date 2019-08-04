@@ -35,7 +35,7 @@ Resource representing collection of anuncios
 
 This returns a Json file with the complete list of the existing ads in the database.
 
-##Actions:
+## Actions:
 
 **GET** method can be filtered with one or several of the following parameters:
 
