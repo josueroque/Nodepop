@@ -40,7 +40,7 @@ router.get('/',async (req, res, next) => {
     const precio = req.query.precio;
     const limit = parseInt(req.query.limit);
     const fields = req.query.fields;
-    const sort = req.query.sort;
+    const sort = req.query.sort.toLowerCase();
     const venta=req.query.venta;
     const tag=req.query.tag;
     let skip;
