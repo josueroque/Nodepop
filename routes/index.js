@@ -190,8 +190,6 @@ let objectFilter={};
     }
   }
 
-
-
    const anuncios = await Anuncio.list({ filter: filter, skip, limit, fields, sort});
 
    res.locals.title='Nodepop';
