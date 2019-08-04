@@ -40,10 +40,11 @@ router.get('/',async (req, res, next) => {
     const precio = req.query.precio;
     const limit = parseInt(req.query.limit);
     const fields = req.query.fields;
-    const sort = req.query.sort.toLowerCase();
+    const sort = req.query.sort;
     const venta=req.query.venta;
     const tag=req.query.tag;
     let skip;
+    
     if(req.query.skip){
       if (isNaN(req.query.skip)){
 

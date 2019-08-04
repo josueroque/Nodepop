@@ -39,10 +39,11 @@ router.get('/', async (req, res, next) => {
     const precio = req.query.precio;
     const limit = parseInt(req.query.limit);
     const fields = req.query.fields;
-    const sort = req.query.sort.toLowerCase();
+    const sort = req.query.sort;
     const venta=req.query.venta;
     const tag=req.query.tag;
     let skip;
+    console.log(sort);
     if(req.query.skip){
       if (isNaN(req.query.skip)){
 
@@ -193,6 +194,7 @@ let objectFilter={};
     }
   }
   console.log(filter);
+
    const anuncios = await Anuncio.list({ filter: filter, skip, limit, fields, sort});
 
    res.locals.title='Nodepop';
