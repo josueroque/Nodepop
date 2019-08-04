@@ -44,8 +44,8 @@ router.get('/',async (req, res, next) => {
     const venta=req.query.venta;
     const tag=req.query.tag;
     let skip;
-    if(skip){
-      if (isNaN(parseInt(req.query.skip))){
+    if(req.query.skip){
+      if (isNaN(req.query.skip)){
 
         res.status(422); 
         throw ('Invalid skip Parameter');
