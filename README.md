@@ -1,6 +1,6 @@
 # Practica Devops
-url:http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/
-ip:18.222.129.172/
+- url:http://ec2-18-222-129-172.us-east-2.compute.amazonaws.com/
+- ip:18.222.129.172/
 
 
 # NodePop
